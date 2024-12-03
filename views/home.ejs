@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        body{
+            font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <!-- EJS Tryal code of HTML -->
+    <!-- <h1>Hey from Server</h1> -->
+    <%# urls.forEach(url => { %>
+        <!-- <li><%#= url.shortId %></li> -->
+    <%# }) %>
+
+    <h1>URL Shortner</h1>
+    <!-- Check wheather the local is present  -->
+    <% if (locals.id) { %>
+     <p>URL Generated: http://localhost:8001/url/<%= id %></p>
+    <% } %>
+    <div>
+        <form method="post" action="/url">
+            <label for="">Input Your Original URL</label>
+            <input type="text" name="url" placeholder="http://exmaple.com">
+            <button type="submit">Generate</button>
+        </form>
+    </div>
+    <div>
+        <% if (locals.urls) { %>
+            <table>
+                <thead>
+                    <th>S.no</th>
+                    <th>ShortID</th>
+                    <th>Redirect</th>
+                    <th>Clicks</th>
+                </thead>
+                <tbody>
+                    <% urls.forEach((url,index) => { %>
+                        <tr>
+                     <td><%= index + 1  %></td>
+                     <td><%= url.shortId  %></td>
+                     <td><%= url.redirectURL  %></td>
+                     <td><%= url.visitHistory.length  %></td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+         
+        <% } %>
+    </div>
+
+
+</body>
+</html>
